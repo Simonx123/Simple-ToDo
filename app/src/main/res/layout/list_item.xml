@@ -27,7 +27,9 @@ xmlns:tools="http://schemas.android.com/tools">
         android:textAllCaps="true"
         android:maxLines="2"
         android:textColor="@color/textColortitle"
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed"
         tools:text="Call Honey"/>
 
 
@@ -39,7 +41,8 @@ xmlns:tools="http://schemas.android.com/tools">
         android:fontFamily="sans-serif-medium"
         android:maxLines="1"
         android:textColor="@color/textColorgeneric"
-        android:textSize="16sp"
+        android:textSize="14sp"
+
         tools:text="Long placeholder location that should wrap to more than 2 lines of text" />
 
 </LinearLayout>
@@ -49,7 +52,7 @@ xmlns:tools="http://schemas.android.com/tools">
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
     android:layout_marginLeft="16dp"
-    android:layout_marginStart="16dp"
+
     android:orientation="vertical">
 
     <TextView
@@ -58,7 +61,7 @@ xmlns:tools="http://schemas.android.com/tools">
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:textColor="@color/textColorgeneric"
-        android:textSize="16sp"
+        android:textSize="14sp"
         tools:text="Mar 6, 2010" />
 
     <TextView
@@ -67,8 +70,9 @@ xmlns:tools="http://schemas.android.com/tools">
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:textColor="@color/high"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:textAllCaps="true"
+        android:textStyle="bold"
         tools:text="high" />
 
 </LinearLayout>

@@ -39,13 +39,13 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
 
     private boolean mToDoHasChanged = false;
 
-    /** Identifier for the pet data loader */
+    /** Identifier for the todo_ data loader */
     private static final int EXISTING_TODO_LOADER = 0;
 
-    /** EditText field to enter the pet's name */
+    /** EditText field to enter the task's name */
     private EditText mNameEditText;
 
-    /** EditText field to enter the pet's breed */
+    /** EditText field to enter the due date */
     private EditText mDateEditText;
 
     /** Using it as static field to update the date field
@@ -53,21 +53,18 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
      * */
     private static EditText mtDateEditText;
 
-    /** EditText field to enter the pet's weight */
+    /** EditText field to enter the note */
     private EditText mNoteEditText;
 
-    /** EditText field to enter the pet's gender */
+    /** EditText field to enter for priority */
     private Spinner mPrioritySpinner;
 
     private Spinner mstatusSpinner;
 
-    /** Content URI for the existing pet (null if it's a new pet) */
+    /** Content URI for the existing task (null if it's a new task) */
     private Uri mCurrentToDoUri;
 
-    /**
-     * Gender of the pet. The possible values are:
-     * 0 for unknown gender, 1 for male, 2 for female.
-     */
+  /*i int variable for both mPlevel & mStatus spinner items */
     private int mPlevel = ToDoEntry.PRIORITY_HIGH;
     private int mStatus = ToDoEntry.STATUS_TODO;
 
@@ -82,25 +79,24 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
         dateFormatter = new SimpleDateFormat("MMM d, ''yy", Locale.US);
 
         // Examine the intent that was used to launch this activity,
-        // in order to figure out if we're creating a new pet or editing an existing one.
+        // in order to figure out if we're creating a new task or editing an existing one.
         Intent intent = getIntent();
         mCurrentToDoUri = intent.getData();
 
-        // If the intent DOES NOT contain a pet content URI, then we know that we are
-        // creating a new pet.
+        // If the intent DOES NOT contain a task content URI, then we know that we are
+        // creating a new task.
         if (mCurrentToDoUri == null) {
-            // This is a new pet, so change the app bar to say "Add a Pet"
+            // This is a new task, so change the app bar to say "Add Task"
             setTitle("Add Task");
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            // (It doesn't make sense to delete a pet that hasn't been created yet.)
             // This method will trigger onPrepareOptionsMenu method
             invalidateOptionsMenu();
         } else {
-            // Otherwise this is an existing pet, so change app bar to say "Edit Pet"
+            // Otherwise this is an existing task, so change app bar to say "Edit Task"
             setTitle("Edit Task");
 
-            // Initialize a loader to read the pet data from the database
+            // Initialize a loader to read the task data from the database
             // and display the current values in the editor
             getLoaderManager().initLoader(EXISTING_TODO_LOADER, null, this);
         }
@@ -128,7 +124,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
             @Override
             public void onClick(View view) {
                 DialogFragment newFragment = new DatePickerFragment();
-                newFragment.show(getSupportFragmentManager(), "datePicker");  //handle your situation here
+                newFragment.show(getSupportFragmentManager(), "datePicker");
 
 
             }
@@ -139,7 +135,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
                     DialogFragment newFragment = new DatePickerFragment();
-                    newFragment.show(getSupportFragmentManager(), "datePicker");  //handle your situation here
+                    newFragment.show(getSupportFragmentManager(), "datePicker");
 
                 }
             }
@@ -163,7 +159,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the use
+
             newDate.set(year, month, day);
             mtDateEditText.setText(dateFormatter.format(newDate.getTime()));
         }
@@ -189,7 +185,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
         builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Keep editing" button, so dismiss the dialog
-                // and continue editing the pet.
+                // and continue editing the task.
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -204,7 +200,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
     // When back button is pressed
     @Override
     public void onBackPressed() {
-        // If the pet hasn't changed, continue with handling back button press
+        // If the task hasn't changed, continue with handling back button press
         if (!mToDoHasChanged) {
             super.onBackPressed();
             return;
@@ -227,7 +223,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
 
 
     /**
-     * Setup the dropdown spinner that allows the user to select the gender of the pet.
+     * Setup the dropdown spinner that allows the user to select the gender of the task
      */
     private void setupSpinner() {
         // Create adapter for spinner. The list options are from the String array it will use
@@ -300,9 +296,9 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
     }
 
     /**
-     * Get user input from editor and save new pet into database.
+     * Get user input from editor and save new task into database.
      */
-    private void savePet(){
+    private void saveTask(){
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
         String dateString = mDateEditText.getText().toString().trim();
@@ -318,7 +314,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
                 Toast.makeText(this, "Task cannot be added. Please provide values for all the required fields",
                         Toast.LENGTH_LONG).show();
                 return;
-                //PetDbHelper mDbHelper = new PetDbHelper(this);
+                //TaskDbHelper mDbHelper = new TaskDbHelper(this);
                 // Gets the data repository in write mode
                 // SQLiteDatabase db = mDbHelper.getWritableDatabase();
             }else {
@@ -338,14 +334,14 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
         values.put(ToDoEntry.COLUMN_TODO_STATUS, mStatus);
 
 /*Insert the new row, returning the primary key value of the new row
-        long newRowId = db.insert(PetEntry.TABLE_NAME, null, values);
+        long newRowId = db.insert(TaskEntry.TABLE_NAME, null, values);
                // Show a toast message depending on whether or not the insertion was successful
         if (newRowId == -1) {
             // If the row ID is -1, then there was an error with insertion.
-            Toast.makeText(this, "Error with saving pet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error with saving task", Toast.LENGTH_SHORT).show();
         } else {
             // Otherwise, the insertion was successful and we can display a toast with the row ID.
-            Toast.makeText(this, "Pet saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Task saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
         }
 */
         if (mCurrentToDoUri == null) {
@@ -361,26 +357,26 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
                         Toast.LENGTH_SHORT).show();
             }
         } else {
-            // Otherwise this is an EXISTING pet, so update the pet with content URI: mCurrentPetUri
+            // Otherwise this is an EXISTING task, so update the task with content URI: mCurrentTaskUri
             // and pass in the new ContentValues. Pass in null for the selection and selection args
-            // because mCurrentPetUri will already identify the correct row in the database that
+            // because mCurrentTaskUri will already identify the correct row in the database that
             // we want to modify.
             int rowsAffected = getContentResolver().update(mCurrentToDoUri, values, null, null);
 
             // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
                 // If no rows were affected, then there was an error with the update.
-                Toast.makeText(this, "Error updating Pet",
+                Toast.makeText(this, "Error updating Task",
                         Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, "Pet updated Successfully",
+                Toast.makeText(this, "Task updated Successfully",
                         Toast.LENGTH_SHORT).show();
             }
         }
 
     }
-    private void deletePet(){
+    private void deleteTask(){
         // Defines a variable to contain the number of rows deleted
         int mRowsDeleted = 0;
 
@@ -394,11 +390,11 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
         // Show a toast message depending on whether or not the update was successful.
         if (mRowsDeleted == 0) {
             // If no rows were affected, then there was an error with the update.
-            Toast.makeText(this, "No Pet Deleted",
+            Toast.makeText(this, "No Task Deleted",
                     Toast.LENGTH_SHORT).show();
         } else {
             // Otherwise, the update was successful and we can display a toast.
-            Toast.makeText(this, "Pet deleted Successfully",
+            Toast.makeText(this, "Task deleted Successfully",
                     Toast.LENGTH_SHORT).show();
         }
 
@@ -415,7 +411,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        // If this is a new pet, hide the "Delete" menu item.
+        // If this is a new task, hide the "Delete" menu item.
         if (mCurrentToDoUri == null) {
             MenuItem menuItem = menu.findItem(R.id.action_delete);
             menuItem.setVisible(false);
@@ -430,20 +426,20 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
             // Respond to a click on the "Save" menu option
             case R.id.action_save:
                 // Do nothing for now
-                savePet();
+                saveTask();
                 finish();
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
                 // Do nothing for now
-                deletePet();
+                deleteTask();
                 finish();
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
                 // Navigate back to parent activity (CatalogActivity)
                 //NavUtils.navigateUpFromSameTask(this);
-                // If the pet hasn't changed, continue with navigating up to parent activity
+                // If the task hasn't changed, continue with navigating up to parent activity
                 // which is the {@link CatalogActivity}.
                 if (!mToDoHasChanged) {
                     NavUtils.navigateUpFromSameTask(EditItemActivity.this);
@@ -472,8 +468,8 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public android.content.Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
-        // Since the editor shows all pet attributes, define a projection that contains
-        // all columns from the pet table
+        // Since the editor shows all task attributes, define a projection that contains
+        // all columns from the task table
         String[] projection = {
                 ToDoEntry._ID,
                 ToDoEntry.COLUMN_TODO_NAME,
@@ -484,7 +480,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
-                mCurrentToDoUri,         // Query the content URI for the current pet
+                mCurrentToDoUri,         // Query the content URI for the current task
                 projection,             // Columns to include in the resulting Cursor
                 null,                   // No selection clause
                 null,                   // No selection arguments
@@ -501,7 +497,7 @@ public class EditItemActivity extends AppCompatActivity implements LoaderManager
         // Proceed with moving to the first row of the cursor and reading data from it
         // (This should be the only row in the cursor)
         if (cursor.moveToFirst()) {
-            // Find the columns of pet attributes that we're interested in
+            // Find the columns of task attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(ToDoEntry.COLUMN_TODO_NAME);
             int dateColumnIndex = cursor.getColumnIndex(ToDoEntry.COLUMN_TODO_DATE);
             int noteColumnIndex = cursor.getColumnIndex(ToDoEntry.COLUMN_TODO_NOTES);

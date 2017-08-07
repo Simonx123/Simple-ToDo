@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 // {@link PetEntry#CONTENT_URI}.
                 // For example, the URI would be "content://com.example.android.pets/pets/2"
                 // if the task with ID 2 was clicked on.
-                Uri currentPetUri = ContentUris.withAppendedId(ToDoEntry.CONTENT_URI, id);
+                Uri currentTaskUri = ContentUris.withAppendedId(ToDoEntry.CONTENT_URI, id);
 
                 // Set the URI on the data field of the intent
-                intent.setData(currentPetUri);
+                intent.setData(currentTaskUri);
 
                 // Launch the {@link EditorActivity} to display the data for the current pet.
                 startActivity(intent);

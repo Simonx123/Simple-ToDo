@@ -13,9 +13,9 @@
 <resources>
     <!-- These are the options displayed in the gender drop-down Spinner -->
     <string-array name="array_priority_options">
-        <item>HIGH</item>
-        <item>MEDIUM</item>
         <item>LOW</item>
+        <item>MEDIUM</item>
+        <item>HIGH</item>
     </string-array>
 
     <!-- These are the options displayed in the gender drop-down Spinner -->

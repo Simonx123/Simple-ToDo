@@ -36,7 +36,7 @@ public class ToDoDbHelper extends SQLiteOpenHelper{
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create a String that contains the SQL statement to create the pets table
+        // Create a String that contains the SQL statement to create the tasks table
         String SQL_CREATE_PETS_TABLE =  "CREATE TABLE " + ToDoEntry.TABLE_NAME + " ("
                 + ToDoEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ToDoEntry.COLUMN_TODO_NAME + " TEXT NOT NULL, "

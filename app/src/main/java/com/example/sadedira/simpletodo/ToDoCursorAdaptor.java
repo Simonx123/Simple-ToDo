@@ -2,6 +2,7 @@ package com.example.sadedira.simpletodo;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,16 +67,20 @@ public class ToDoCursorAdaptor extends CursorAdapter {
         int priority = cursor.getInt(cursor.getColumnIndexOrThrow(ToDoEntry.COLUMN_TODO_PLEVEL));
         String date = cursor.getString(cursor.getColumnIndexOrThrow(ToDoEntry.COLUMN_TODO_DATE));
 
-        String mpriority = "";
+
         switch (priority) {
             case ToDoEntry.PRIORITY_HIGH:
-                mpriority = "HIGH";
+
+                ToDoPriorityTextView.setText("HIGH");
+                ToDoPriorityTextView.setTextColor(Color.parseColor("#E13A20"));
                 break;
             case ToDoEntry.PRIORITY_LOW:
-                mpriority = "LOW";
+                ToDoPriorityTextView.setText("LOW");
+                ToDoPriorityTextView.setTextColor(Color.parseColor("#10CAC9"));
                 break;
             case ToDoEntry.PRIORITY_MEDIUM:
-                mpriority = "MEDIUM";
+                ToDoPriorityTextView.setText("MEDIUM");
+                ToDoPriorityTextView.setTextColor(Color.parseColor("#F5A623"));
                 break;
         }
 
@@ -83,7 +88,6 @@ public class ToDoCursorAdaptor extends CursorAdapter {
         // Populate fields with extracted properties
         ToDoNameTextView.setText(name);
         ToDoNoteTextview.setText(notes);
-        ToDoPriorityTextView.setText(mpriority);
         ToDoDateTextview.setText(date);
         //PetWeightTextview.setText(weight);
     }

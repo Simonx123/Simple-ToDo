@@ -33,22 +33,20 @@ public class ToDoContract {
 
     /**
      * Possible path (appended to base content URI for possible URI's)
-     * For instance, content://com.example.android.pets/pets/ is a valid path for
-     * looking at pet data. content://com.example.android.pets/staff/ will fail,
      * as the ContentProvider hasn't been given any information on what to do with "staff".
      */
     public static final String PATH_TODO = "todo";
 
     /**
-     * Inner class that defines constant values for the pets database table.
-     * Each entry in the table represents a single pet.
+     * Inner class that defines constant values for the tasks database table.
+     * Each entry in the table represents a single task.
      */
     public static final class ToDoEntry implements BaseColumns {
 
-        /** The content URI to access the pet data in the provider */
+        /** The content URI to access the task data in the provider */
         public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_TODO);
 
-        /** Name of database table for pets */
+        /** Name of database table for tasks */
         public final static String TABLE_NAME = "todo";
 
         /**
@@ -76,7 +74,7 @@ public class ToDoContract {
         public final static String COLUMN_TODO_NOTES = "notes";
 
         /**
-         * Priority level and status of the pet.
+         * Priority level and status of the task.
          *
          * Type: INTEGER
          */
@@ -113,13 +111,13 @@ public class ToDoContract {
         }
 
         /**
-         * The MIME type of the {@link #CONTENT_URI} for a list of pets.
+         * The MIME type of the {@link #CONTENT_URI} for a list of tasks.
          */
         public static final String CONTENT_LIST_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TODO;
 
         /**
-         * The MIME type of the {@link #CONTENT_URI} for a single pet.
+         * The MIME type of the {@link #CONTENT_URI} for a single task.
          */
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TODO;

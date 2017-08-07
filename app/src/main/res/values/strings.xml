@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Simple ToDo</string>
+    <string name="app_name">DaList</string>
     <string name="edit_name">Edit Item</string>
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
