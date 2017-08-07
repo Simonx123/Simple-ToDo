@@ -1,33 +1,33 @@
-App Name: DaList
+# Pre-work - *DaList*
 
-DaList is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
+**DaList** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
 
-Submitted by: Simon Adediran
+Submitted by: **Simon Adediran**
 
-Time spent: 7 hours spent in total
+Time spent: **7** hours spent in total
 
 ## User Stories
 
-The following functionality is completed:
+The following **required** functionality is completed:
 
-1. User can successfully add and remove items from the todo list
-2. User can tap a todo item in the list and bring up an edit screen for the todo item and then have any changes to the text reflected in  the todo list.
-3. User can persist todo items and retrieve them properly on app restart
+* [ ]  User can **successfully add and remove items** from the todo list
+* [ ]  User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in  the todo list.
+* [ ]  User can persist todo items and retrieve them properly on app restart
 
-The following addition features are implemented:
+The following **optional** features are implemented:
 
-1.  Persist the todo items [into SQLite] instead of a text file
-2.  Improve style of the todo items in the list [using a custom adapter]
-3.  Add support for completion due dates for todo items (and display within listview item)
-4.  Use a [DialogFragment] to inform users of unsaved changes while editing
-5.  Add support for selecting the priority(HIGH, MEDIUM, LOW) of each todo item (and display in listview item). 
-6. 	Tweak the style improving the UI / UX, play with colors, images or backgrounds
+* [ ]   Persist the todo items [into SQLite] instead of a text file
+* [ ]  	Improve style of the todo items in the list [using a custom adapter]
+* [ ]   Add support for completion due dates for todo items (and display within listview item)
+* [ ]   Use a [DialogFragment] to inform users of unsaved changes while editing
+* [ ]   Add support for selecting the priority(HIGH, MEDIUM, LOW) of each todo item (and display in listview item). 
+* [ ]  	Tweak the style improving the UI / UX, play with colors, images or backgrounds
 
 The following **additional** features are implemented:
 
-1.  Use a [DialogFragment] to inform users of unsaved changes while editing
+* [ ]  Use a [DialogFragment] to inform users of unsaved changes while editing
 
-Video Walkthrough
+## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
@@ -35,19 +35,19 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-Project Analysis
+## Project Analysis
 
 As part of your pre-work submission, please reflect on the app and answer the following questions below:
 
 **Question 1:** "What are your reactions to the Android app development platform so far? Compare and contrast Android's approach to layouts and user interfaces in past platforms you've used."
 
-The platform makes implementing user interfaces easy and friendly with lot of customization
+**Answer:** The platform makes implementing user interfaces easy and friendly with lot of customization
 
 **Question 2:** "Take a moment to reflect on the `ArrayAdapter` used in your pre-work. How would you describe an adapter in this context and what is its function in Android? Why do you think the adapter is important? Explain the purpose of the `convertView` in the `getView` method of the `ArrayAdapter`."
 
 ArrayAdapter used by android helps to attach or present data from any data source to a UI element. Or can be said to return a view per data/object in a data source
 
-ConvertView track views that can be reuse, this helps to improve the performance of the app by ensuring better resource utilization.
+**Answer:** ConvertView track views that can be reuse, this helps to improve the performance of the app by ensuring better resource utilization.
 
 
 ## Notes
