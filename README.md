@@ -26,6 +26,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x]  Use a [DialogFragment] to inform users of unsaved changes while editing
+* [x]  Use a [DialogFragment] for the datepicker in the due date view
 
 ## Video Walkthrough
 
